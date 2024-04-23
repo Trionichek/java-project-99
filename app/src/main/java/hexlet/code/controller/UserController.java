@@ -3,25 +3,20 @@ package hexlet.code.controller;
 import hexlet.code.dto.UserCreateDto;
 import hexlet.code.dto.UserDto;
 import hexlet.code.dto.UserUpdateDto;
-import hexlet.code.exception.ResourceNotFoundException;
-import hexlet.code.mapper.UserMapper;
-import hexlet.code.repository.UserRepository;
 import hexlet.code.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/users")
 public class UserController {
 
+    @Autowired
     private UserService userService;
-
-
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
@@ -43,7 +38,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto update(@RequestBody @Valid UserUpdateDto userData, @PathVariable Long id) {
+    public UserDto update(@Valid @RequestBody UserUpdateDto userData, @PathVariable Long id) {
         return userService.update(id, userData);
     }
 

@@ -2,6 +2,7 @@ package hexlet.code.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +21,6 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
-@ToString(includeFieldNames = true, onlyExplicitlyIncluded = true)
 @Getter
 @Setter
 public class User implements BaseEntity, UserDetails{
@@ -31,8 +31,8 @@ public class User implements BaseEntity, UserDetails{
     private Long id;
 
     @Column(unique = true)
+    @NotBlank
     @Email
-    @ToString.Include
     private String email;
 
     @ToString.Include
