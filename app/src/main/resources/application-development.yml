@@ -5,3 +5,6 @@ spring:
     password: 123
   h2:
     console.enabled: true
+  security:
+    headers:
+      frame=false:

@@ -39,7 +39,7 @@ public class UserService {
     public UserDto create(UserCreateDto data) {
         User newUser = userMapper.map(data);
         String encodedPassword = encoder.encode(data.getPassword());
-        newUser.setPasswordDigest(encodedPassword);
+        //newUser.setPasswordDigest(encodedPassword);
         userRepository.save(newUser);
         return userMapper.map(newUser);
     }
@@ -49,17 +49,16 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
         userMapper.update(data, user);
 
-        if (data.getPassword() != null) {
+        /*if (data.getPassword() != null) {
             String encodedPassword = encoder.encode(data.getPassword().get());
             user.setPasswordDigest(encodedPassword);
-        }
+        }*/
 
         userRepository.save(user);
         return userMapper.map(user);
     }
 
     public void delete(Long id) {
-
         userRepository.deleteById(id);
     }
 }

@@ -16,11 +16,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Component
 @AllArgsConstructor
 public class DataInitializer implements ApplicationRunner {
@@ -39,26 +34,13 @@ public class DataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        try {
-            throw new Exception("This is a test.");
-        } catch (Exception e) {
-            Sentry.captureException(e);
-        }
 
-        if (userRepository.findByEmail("hexlet@example.com").isEmpty()) {
-            String firstName = "Ilya";
-            String lastName = "Markin";
-            String email = "hexlet@example.com";
-            String password = "qwerty";
-
-            UserCreateDto userData = new UserCreateDto();
-            userData.setFirstName(firstName);
-            userData.setLastName(lastName);
-            userData.setEmail(email);
-            userData.setPassword(password);
-
-            userService.create(userData);
-        }
+        var userData = new UserCreateDto();
+        userData.setFirstName("Ilya");
+        userData.setLastName("Markin");
+        userData.setEmail("hexlet@example.com");
+        userData.setPassword("123");
+        userService.create(userData);
 
         /*Map<String, String> statuses = new HashMap<>(
                 Map.of("draft", "В разработке", "to_review", "На рассмотрении",

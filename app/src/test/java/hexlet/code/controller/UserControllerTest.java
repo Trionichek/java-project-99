@@ -68,7 +68,7 @@ public class UserControllerTest {
         assertThatJson(body).and(
                 a -> a.node("firstName").isEqualTo(testUser.getFirstName()),
                 a -> a.node("lastName").isEqualTo(testUser.getLastName()),
-                a -> a.node("email").isEqualTo((testUser.getEmail()))
+                a -> a.node("username").isEqualTo((testUser.getEmail()))
         );
 
         mockMvc.perform(delete("/api/users/" + testUser.getId()).with(token));
@@ -89,7 +89,7 @@ public class UserControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-        Map<String, String> data = new HashMap<>(Map.of("password", "123", "email", "vspv@mail.ru"));
+        Map<String, String> data = new HashMap<>(Map.of("password", "123", "email", "qwerty@mail.ru"));
 
         MockHttpServletRequestBuilder request = post("/api/users").with(token)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -130,8 +130,5 @@ public class UserControllerTest {
 
         User destroyedUser = userRepository.findById(testUser.getId()).orElse(null);
         assertThat(destroyedUser).isNull();
-
-        /*mockMvc.perform(delete("/api/users/" + testUser.getId()).with(token))
-                .andExpect(status().isForbidden());*/
     }
 }
