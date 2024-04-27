@@ -1,8 +1,6 @@
 package hexlet.code.util;
 
-//import hexlet.code.model.Label;
-//import hexlet.code.model.Task;
-//import hexlet.code.model.TaskStatus;
+import hexlet.code.model.TaskStatus;
 import hexlet.code.model.User;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
@@ -19,9 +17,7 @@ import org.springframework.stereotype.Component;
 public class ModelGenerator {
 
     private Model<User> userModel;
-    //private Model<TaskStatus> statusModel;
-    //private Model<Task> taskModel;
-    //private Model<Label> labelModel;
+    private Model<TaskStatus> statusModel;
 
     @Autowired
     private Faker faker;
@@ -34,7 +30,6 @@ public class ModelGenerator {
 
        userModel = Instancio.of(User.class)
                 .ignore(Select.field("id"))
-                //.ignore(Select.field("tasks"))
                 .supply(Select.field("passwordDigest"),
                         () -> {
                             String password = faker.internet().password(3, 10);
@@ -45,29 +40,11 @@ public class ModelGenerator {
                 .supply(Select.field("email"), () -> faker.internet().emailAddress())
                 .toModel();
 
-        /*statusModel = Instancio.of(TaskStatus.class)
+        statusModel = Instancio.of(TaskStatus.class)
                 .ignore(Select.field("id"))
-                .ignore(Select.field("tasks"))
                 .supply(Select.field("name"), () -> faker.animal().name())
                 .supply(Select.field("slug"), () -> faker.lorem().word())
                 .toModel();
-
-        taskModel = Instancio.of(Task.class)
-                .ignore(Select.field("id"))
-                .ignore(Select.field("taskStatus"))encodedPassword
-                .ignore(Select.field("assignee"))
-                .ignore(Select.field("labels"))
-                .supply(Select.field("name"), () -> faker.beer().name())
-                .supply(Select.field("index"), () -> faker.number().positive())
-                .supply(Select.field("description"), () -> faker.beer().brand())
-                .toModel();
-
-        labelModel = Instancio.of(Label.class)
-                .ignore(Select.field("id"))
-                .ignore(Select.field("tasks"))
-                .supply(Select.field("name"), () -> faker.lorem().characters(3, 1000))
-                .toModel();
-    }*/
     }
 }
 
