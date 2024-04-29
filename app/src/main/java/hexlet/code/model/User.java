@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -43,6 +44,10 @@ public class User implements BaseEntity, UserDetails{
 
     private String passwordDigest;
 
+    @OneToMany(mappedBy = "assignee")
+    private List<Task> tasks;
+
+
     @LastModifiedDate
     private LocalDate updatedAt;
 
@@ -67,21 +72,21 @@ public class User implements BaseEntity, UserDetails{
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
