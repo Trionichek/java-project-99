@@ -1,8 +1,8 @@
 package hexlet.code.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.EqualsAndHashCode;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,26 +12,24 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "task_statuses")
+@Table(name = "labels")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public class TaskStatus implements BaseEntity{
+public class Label {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Size(min = 3, max = 1000)
     @Column(unique = true)
-    @NotBlank
     private String name;
 
-    @Column(unique = true)
-    @NotBlank
-    private String slug;
-
-    @OneToMany(mappedBy = "taskStatus")
+    @ManyToMany
     private List<Task> tasks;
+
 
     @CreatedDate
     private LocalDate createdAt;

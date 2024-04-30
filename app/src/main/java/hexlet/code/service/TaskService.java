@@ -48,7 +48,7 @@ public class TaskService {
     }
 
     public void delete(Long id) {
-        Task status = taskRepository.findById(id)
+        Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + "not found"));
 
         taskRepository.deleteById(id);

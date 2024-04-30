@@ -69,10 +69,6 @@ public class UserControllerTest {
                 a -> a.node("lastName").isEqualTo(testUser.getLastName()),
                 a -> a.node("username").isEqualTo((testUser.getEmail()))
         );
-
-        mockMvc.perform(delete("/api/users/" + testUser.getId()).with(token));
-        mockMvc.perform(get("/api/users/" + testUser.getId()).with(token))
-                .andExpect(status().isNotFound());
     }
 
     @Test

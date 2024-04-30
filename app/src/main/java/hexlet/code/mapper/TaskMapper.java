@@ -3,10 +3,16 @@ package hexlet.code.mapper;
 import hexlet.code.dto.TaskCreateDTO;
 import hexlet.code.dto.TaskDTO;
 import hexlet.code.dto.TaskUpdateDTO;
+import hexlet.code.model.Label;
 import hexlet.code.model.Task;
 import hexlet.code.repository.TaskStatusRepository;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.xml.transform.Source;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Mapper(
         uses = { JsonNullableMapper.class, ReferenceMapper.class },
@@ -26,11 +32,18 @@ public abstract class TaskMapper {
     @Mapping(source = "description", target = "content")
     @Mapping(source = "taskStatus.slug", target = "status")
     @Mapping(source = "assignee.id", target = "assignee_id")
+    @Mapping(target = "taskLabelIds", expression = "java(labelsToLabelIds(task.getLabels()))")
     public abstract TaskDTO map(Task task);
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "content", target = "description")
     @Mapping(source = "status", target = "taskStatus.slug")
     @Mapping(source = "assignee_id", target = "assignee")
-    public abstract void update(TaskUpdateDTO dto, @MappingTarget Task model);
+    public abstract void update(TaskUpdateDTO dto, @MappingTarget Task task);
+
+    public List<Long> labelsToLabelIds(List<Label> labels) {
+        return labels.stream()
+                .map(Label::getId)
+                .toList();
+    }
 }

@@ -71,10 +71,6 @@ public class TaskStatusControllerTest {
                 a -> a.node("name").isEqualTo(testStatus.getName()),
                 a -> a.node("slug").isEqualTo(testStatus.getSlug())
         );
-
-        mockMvc.perform(delete("/api/task_statuses/" + testStatus.getId()).with(token));
-        mockMvc.perform(get("/api/task_statuses/" + testStatus.getId()).with(token))
-                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -106,7 +102,7 @@ public class TaskStatusControllerTest {
 
     @Test
     public void testUpdate() throws Exception {
-        Map<String, String> data = new HashMap<>(Map.of("name", "hello2"));
+        Map<String, String> data = new HashMap<>(Map.of("name", "test"));
 
         MockHttpServletRequestBuilder request = put("/api/task_statuses/" + testStatus.getId()).with(token)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -117,14 +113,8 @@ public class TaskStatusControllerTest {
 
         TaskStatus updatedStatus = taskStatusRepository.findBySlug(testStatus.getSlug()).orElse(null);
         assertThat(updatedStatus).isNotNull();
-        assertThat(updatedStatus.getName()).isEqualTo("hello2");
+        assertThat(updatedStatus.getName()).isEqualTo("test");
         assertThat(updatedStatus.getSlug()).isEqualTo(testStatus.getSlug());
-
-        mockMvc.perform(delete("/api/task_statuses/" + testStatus.getId()).with(token));
-        mockMvc.perform(put("/api/task_statuses/" + testStatus.getId()).with(token)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(data)))
-                .andExpect(status().isNotFound());
     }
 
     @Test

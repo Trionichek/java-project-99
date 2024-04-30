@@ -1,9 +1,12 @@
 package hexlet.code.component;
 
+import hexlet.code.dto.LabelCreateDTO;
 import hexlet.code.dto.TaskStatusCreateDTO;
 import hexlet.code.model.User;
+import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.repository.UserRepository;
+import hexlet.code.service.LabelService;
 import hexlet.code.service.TaskStatusService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -24,9 +29,17 @@ public class DataInitializer implements ApplicationRunner {
     @Autowired
     private UserRepository userRepository;
 
-    private final TaskStatusRepository statusRepository;
+    @Autowired
+    private LabelRepository labelRepository;
 
-    private final TaskStatusService statusService;
+    @Autowired
+    private TaskStatusRepository statusRepository;
+
+    @Autowired
+    private TaskStatusService statusService;
+
+    @Autowired
+    private LabelService labelService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -43,9 +56,9 @@ public class DataInitializer implements ApplicationRunner {
         userRepository.save(user);
 
         Map<String, String> statuses = new HashMap<>(
-                Map.of("draft", "В разработке", "to_review", "На рассмотрении",
-                        "to_be_fixed", "Должно быть исправлено",
-                        "to_publish", "Готово к публикации", "published", "Опубликовано")
+                Map.of("draft", "Draft", "to_review", "ToRewiew",
+                        "to_be_fixed", "ToBeFixed",
+                        "to_publish", "ToPublish", "published", "Published")
         );
 
         TaskStatusCreateDTO statusData = new TaskStatusCreateDTO();
@@ -54,6 +67,15 @@ public class DataInitializer implements ApplicationRunner {
                 statusData.setSlug(status.getKey());
                 statusData.setName(status.getValue());
                 statusService.create(statusData);
+            }
+        }
+
+        List<String> labels = new ArrayList<>(List.of("bug", "feature"));
+        LabelCreateDTO labelData = new LabelCreateDTO();
+        for (String label : labels) {
+            if (labelRepository.findByName(label).isEmpty()) {
+                labelData.setName(label);
+                labelService.create(labelData);
             }
         }
     }
