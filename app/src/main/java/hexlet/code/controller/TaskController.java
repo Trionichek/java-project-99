@@ -18,11 +18,11 @@ public class TaskController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<List<TaskDTO>> index() {
-        var users = taskService.getAll();
+    ResponseEntity<List<TaskDTO>> index(TaskParamsDTO params) {
+        var tasks = taskService.getAll(params);
         return ResponseEntity.ok()
-                .header("X-Total-Count", String.valueOf(users.size()))
-                .body(users);
+                .header("X-Total-Count", String.valueOf(tasks.size()))
+                .body(tasks);
     }
 
     @PostMapping("")

@@ -47,7 +47,7 @@ public class ModelGenerator {
 
         statusModel = Instancio.of(TaskStatus.class)
                 .ignore(Select.field("id"))
-                .ignore(Select.field("task"))
+                .ignore(Select.field("tasks"))
                 .supply(Select.field("name"), () -> faker.animal().name())
                 .supply(Select.field("slug"), () -> faker.lorem().word())
                 .toModel();

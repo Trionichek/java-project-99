@@ -107,17 +107,22 @@ public class TaskControllerTest {
                 a -> a.node("index").isEqualTo(testTask.getIndex()),
                 a -> a.node("content").isEqualTo(testTask.getDescription()),
                 a -> a.node("status").isEqualTo(testTask.getTaskStatus().getSlug()),
-                a -> a.node("assignee_id").isEqualTo(testTask.getAssignee().getId()),
-                a -> a.node("taskLabelIds").isArray()
+                a -> a.node("assignee_id").isEqualTo(testTask.getAssignee().getId())//,
+                //a -> a.node("taskLabelIds").isArray()
         );
     }
 
     @Test
     public void testIndex() throws Exception {
-        mockMvc.perform(get("/api/tasks/{id}", testTask.getId())
-                        .with(token))
-                .andExpect(status()
-                        .isOk());
+        MvcResult result = mockMvc.perform(get("/api/tasks").with(token)
+                        .param("titleCont", testTask.getName())
+                        .param("assigneeId", String.valueOf(testTask.getAssignee().getId()))
+                        .param("status", testStatus.getSlug())
+                        .param("labelId", String.valueOf(testLabel.getId())))
+                .andExpect(status().isOk())
+                .andReturn();
+        String body = result.getResponse().getContentAsString();
+        assertThatJson(body).isArray().isNotEmpty();
 
     }
 

@@ -8,6 +8,7 @@ import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.service.LabelService;
 import hexlet.code.service.TaskStatusService;
+import io.sentry.Sentry;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -43,11 +44,12 @@ public class DataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-
-        User defaultUser = userRepository.findByEmail("hexlet@example.com").orElse(null);
-        if (defaultUser != null) {
-            return;
+        try {
+            throw new Exception("This is a test.");
+        } catch (Exception e) {
+            Sentry.captureException(e);
         }
+
         User user = new User();
         user.setEmail("hexlet@example.com");
         user.setFirstName("Ilya");

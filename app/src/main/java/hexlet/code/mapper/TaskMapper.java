@@ -5,14 +5,13 @@ import hexlet.code.dto.TaskDTO;
 import hexlet.code.dto.TaskUpdateDTO;
 import hexlet.code.model.Label;
 import hexlet.code.model.Task;
-import hexlet.code.repository.TaskStatusRepository;
+import hexlet.code.repository.LabelRepository;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.xml.transform.Source;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Mapper(
         uses = { JsonNullableMapper.class, ReferenceMapper.class },
@@ -22,17 +21,24 @@ import java.util.stream.Collectors;
 )
 public abstract class TaskMapper {
 
+    @Autowired
+    private LabelRepository labelRepository;
+
     @Mapping(target = "name", source = "title")
     @Mapping(target = "description", source = "content")
-    @Mapping(target = "assignee", source = "assignee_id")
+/*    @Mapping(target = "assignee", source = "assignee_id")
     @Mapping(target = "taskStatus.slug", source = "status")
+    @Mapping(target = "taskStatus.name", defaultValue = "HuiSosi")*/
+    @Mapping(target = "assignee", ignore = true)
+    @Mapping(target = "labels", ignore = true)
+    @Mapping(target = "taskStatus", ignore = true)
     public abstract Task map(TaskCreateDTO taskCreateDTO);
 
     @Mapping(source = "name", target = "title")
     @Mapping(source = "description", target = "content")
     @Mapping(source = "taskStatus.slug", target = "status")
     @Mapping(source = "assignee.id", target = "assignee_id")
-    @Mapping(target = "taskLabelIds", expression = "java(labelsToLabelIds(task.getLabels()))")
+    //@Mapping(source = "labels", target = "taskLabelIds")
     public abstract TaskDTO map(Task task);
 
     @Mapping(source = "title", target = "name")
@@ -41,9 +47,13 @@ public abstract class TaskMapper {
     @Mapping(source = "assignee_id", target = "assignee")
     public abstract void update(TaskUpdateDTO dto, @MappingTarget Task task);
 
-    public List<Long> labelsToLabelIds(List<Label> labels) {
+   /* public Set<Label> toLabelSet(List<Long> ids) {
+        return new HashSet<>(labelRepository.findAllById(ids));
+    }
+
+    public List<Long> toLabelIdList(Set<Label> labels) {
         return labels.stream()
                 .map(Label::getId)
                 .toList();
-    }
+    }*/
 }
