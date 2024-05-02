@@ -15,6 +15,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,7 +38,7 @@ public class TaskStatus implements BaseEntity {
     private String slug;
 
     @OneToMany(mappedBy = "taskStatus")
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();;
 
     @CreatedDate
     private LocalDate createdAt;
