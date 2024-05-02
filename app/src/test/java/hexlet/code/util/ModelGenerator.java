@@ -32,14 +32,14 @@ public class ModelGenerator {
     @PostConstruct
     private void init() {
 
-       userModel = Instancio.of(User.class)
+        userModel = Instancio.of(User.class)
                 .ignore(Select.field("id"))
                 .ignore(Select.field("tasks"))
                 .supply(Select.field("passwordDigest"),
-                        () -> {
-                            String password = faker.internet().password(3, 10);
-                            return passwordEncoder.encode(password);
-                        })
+                    () -> {
+                        String password = faker.internet().password(3, 10);
+                        return passwordEncoder.encode(password);
+                    })
                 .supply(Select.field("firstName"), () -> faker.name().firstName())
                 .supply(Select.field("lastName"), () -> faker.name().lastName())
                 .supply(Select.field("email"), () -> faker.internet().emailAddress())

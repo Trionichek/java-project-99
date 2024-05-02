@@ -23,7 +23,7 @@ public class TaskCreateDTO {
     @NotNull
     private String status;
 
-    private Long assignee_id;
+    private Long assigneeId;
 
     private List<Long> taskLabelIds;
 
