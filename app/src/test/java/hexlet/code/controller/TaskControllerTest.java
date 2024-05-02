@@ -107,7 +107,7 @@ public class TaskControllerTest {
                 a -> a.node("index").isEqualTo(testTask.getIndex()),
                 a -> a.node("content").isEqualTo(testTask.getDescription()),
                 a -> a.node("status").isEqualTo(testTask.getTaskStatus().getSlug()),
-                a -> a.node("assignee_id").isEqualTo(testTask.getAssignee().getId())//,
+                a -> a.node("assigneeId").isEqualTo(testTask.getAssignee().getId())//,
                 //a -> a.node("taskLabelIds").isArray()
         );
     }

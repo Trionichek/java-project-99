@@ -69,7 +69,7 @@ public class UserControllerTest {
         assertThatJson(body).and(
                 a -> a.node("firstName").isEqualTo(testUser.getFirstName()),
                 a -> a.node("lastName").isEqualTo(testUser.getLastName()),
-                a -> a.node("username").isEqualTo((testUser.getEmail()))
+                a -> a.node("email").isEqualTo((testUser.getEmail()))
         );
     }
 
