@@ -20,6 +20,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class TaskService {
+
     @Autowired
     private TaskRepository taskRepository;
 
@@ -31,9 +32,9 @@ public class TaskService {
 
     public List<TaskDTO> getAll(TaskParamsDTO params) {
         Specification<Task> spec = taskSpecification.build(params);
-        List<Task> statuses = taskRepository.findAll();
+        List<Task> statuses = taskRepository.findAll(spec);
         return statuses.stream()
-                .map(t -> taskMapper.map(t))
+                .map(taskMapper::map)
                 .toList();
     }
 

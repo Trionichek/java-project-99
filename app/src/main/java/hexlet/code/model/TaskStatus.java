@@ -8,19 +8,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
+import jakarta.validation.constraints.Size;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "task_statuses")
 @EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class TaskStatus implements BaseEntity {
@@ -30,15 +34,15 @@ public class TaskStatus implements BaseEntity {
     private Long id;
 
     @Column(unique = true)
-    @NotBlank
+    @Size(min = 1)
     private String name;
 
     @Column(unique = true)
-    @NotBlank
+    @Size(min = 1)
     private String slug;
 
     @OneToMany(mappedBy = "taskStatus")
-    private List<Task> tasks = new ArrayList<>();;
+    private List<Task> tasks;
 
     @CreatedDate
     private LocalDate createdAt;
