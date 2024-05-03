@@ -8,7 +8,7 @@ plugins {
     id("io.freefair.lombok") version "8.4"
     id("io.sentry.jvm.gradle") version "3.14.0"
 }
-application {mainClass.set("hexlet.code.App")}
+application {mainClass.set("hexlet.code.AppApplication")}
 
 group = "hexlet.code"
 version = "1.0-SNAPSHOT"
