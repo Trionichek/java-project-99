@@ -1,9 +1,9 @@
 FROM gradle:8.4.0-jdk20
 
-WORKDIR /app
+WORKDIR /
 
-COPY /app .
+COPY / .
 
-RUN ./gradlew --no-daemon build
+RUN gradle installDist
 
 CMD ./build/install/app/bin/app --spring.profiles.active=production
