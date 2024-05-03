@@ -18,7 +18,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "tasks")
@@ -47,7 +47,7 @@ public class Task implements BaseEntity {
     private User assignee;
 
     @ManyToMany
-    private Set<Label> labels;
+    private List<Label> labels;
 
     @CreatedDate
     private LocalDate createdAt;

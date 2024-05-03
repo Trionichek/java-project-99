@@ -17,9 +17,8 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 @Mapper(
@@ -58,14 +57,14 @@ public abstract class TaskMapper {
     public abstract void update(TaskUpdateDTO dto, @MappingTarget Task task);
 
 
-    public List<Long> toLabelIdList(Set<Label> labels) {
+    public List<Long> toLabelIdList(List<Label> labels) {
         return labels.stream()
                 .map(Label::getId)
                 .toList();
     }
 
-    public Set<Label> toLabelSet(List<Long> ids) {
-        return new HashSet<>(labelRepository.findAllById(ids));
+    public List<Label> toLabelList(List<Long> ids) {
+        return new ArrayList<>(labelRepository.findAllById(ids));
     }
 
     public TaskStatus toTaskStatus(String statusSlug) {
