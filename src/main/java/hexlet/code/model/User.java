@@ -53,7 +53,6 @@ public class User implements BaseEntity, UserDetails {
     @OneToMany(mappedBy = "assignee")
     private List<Task> tasks;
 
-
     @LastModifiedDate
     private LocalDate updatedAt;
 
