@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<List<UserDto>> index() {
+    public ResponseEntity<List<UserDto>> index() {
         var users = userService.getAll();
         return ResponseEntity.ok()
                 .header("X-Total-Count", String.valueOf(users.size()))

@@ -32,16 +32,16 @@ public class TaskService {
 
     public List<TaskDTO> getAll(TaskParamsDTO params) {
         Specification<Task> spec = taskSpecification.build(params);
-        List<Task> statuses = taskRepository.findAll(spec);
-        return statuses.stream()
+        List<Task> tasks = taskRepository.findAll(spec);
+        return tasks.stream()
                 .map(taskMapper::map)
                 .toList();
     }
 
     public TaskDTO getById(Long id) {
-        Task status = taskRepository.findById(id)
+        Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + "not found"));
-        return taskMapper.map(status);
+        return taskMapper.map(task);
     }
 
     public TaskDTO create(TaskCreateDTO data) {

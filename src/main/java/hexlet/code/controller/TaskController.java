@@ -30,7 +30,7 @@ public class TaskController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<List<TaskDTO>> index(TaskParamsDTO params) {
+    public ResponseEntity<List<TaskDTO>> index(TaskParamsDTO params) {
         var tasks = taskService.getAll(params);
         return ResponseEntity.ok()
                 .header("X-Total-Count", String.valueOf(tasks.size()))

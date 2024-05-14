@@ -24,22 +24,22 @@ public class LabelService {
     private LabelMapper labelMapper;
 
     public List<LabelDTO> getAll() {
-        List<Label> statuses = labelRepository.findAll();
-        return statuses.stream()
+        List<Label> labels = labelRepository.findAll();
+        return labels.stream()
                 .map(t -> labelMapper.map(t))
                 .toList();
     }
 
     public LabelDTO getById(Long id) {
-        Label status = labelRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + "not found"));
-        return labelMapper.map(status);
+        Label label = labelRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Label with id " + id + "not found"));
+        return labelMapper.map(label);
     }
 
     public LabelDTO create(LabelCreateDTO data) {
-        Label newStatus = labelMapper.map(data);
-        labelRepository.save(newStatus);
-        return labelMapper.map(newStatus);
+        Label newLabel = labelMapper.map(data);
+        labelRepository.save(newLabel);
+        return labelMapper.map(newLabel);
     }
 
     public LabelDTO update(Long id, LabelUpdateDTO data) {

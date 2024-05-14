@@ -28,11 +28,11 @@ public class LabelController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<List<LabelDTO>> index() {
-        var users = labelService.getAll();
+    public ResponseEntity<List<LabelDTO>> index() {
+        List<LabelDTO> labels = labelService.getAll();
         return ResponseEntity.ok()
-                .header("X-Total-Count", String.valueOf(users.size()))
-                .body(users);
+                .header("X-Total-Count", String.valueOf(labels.size()))
+                .body(labels);
     }
 
     @PostMapping("")

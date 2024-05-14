@@ -30,11 +30,11 @@ public class TaskStatusController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<List<TaskStatusDTO>> index() {
-        var users = taskStatusService.getAll();
+    public ResponseEntity<List<TaskStatusDTO>> index() {
+        var statuses = taskStatusService.getAll();
         return ResponseEntity.ok()
-                .header("X-Total-Count", String.valueOf(users.size()))
-                .body(users);
+                .header("X-Total-Count", String.valueOf(statuses.size()))
+                .body(statuses);
     }
 
     @PostMapping("")
