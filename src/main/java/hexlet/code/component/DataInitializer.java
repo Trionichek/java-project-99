@@ -50,18 +50,20 @@ public class DataInitializer implements ApplicationRunner {
             Sentry.captureException(e);
         }
 
-        User user = new User();
-        user.setEmail("hexlet@example.com");
-        user.setFirstName("Ilya");
-        user.setLastName("Markin");
-        user.setPasswordDigest(passwordEncoder.encode("123"));
-        userRepository.save(user);
+        if (userRepository.findByEmail("hexlet@example.com").isEmpty()) {
+            User user = new User();
+            user.setEmail("hexlet@example.com");
+            user.setFirstName("Ilya");
+            user.setLastName("Markin");
+            user.setPasswordDigest(passwordEncoder.encode("123"));
+            userRepository.save(user);
+        }
 
-        Map<String, String> statuses = new HashMap<>(
-                Map.of("draft", "Draft", "to_review", "ToRewiew",
-                        "to_be_fixed", "ToBeFixed",
-                        "to_publish", "ToPublish", "published", "Published")
-        );
+            Map<String, String> statuses = new HashMap<>(
+                    Map.of("draft", "Draft", "to_review", "ToRewiew",
+                            "to_be_fixed", "ToBeFixed",
+                            "to_publish", "ToPublish", "published", "Published")
+            );
 
         TaskStatusCreateDTO statusData = new TaskStatusCreateDTO();
         for (Map.Entry<String, String> status : statuses.entrySet()) {
