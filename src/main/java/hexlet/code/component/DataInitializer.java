@@ -59,11 +59,11 @@ public class DataInitializer implements ApplicationRunner {
             userRepository.save(user);
         }
 
-            Map<String, String> statuses = new HashMap<>(
-                    Map.of("draft", "Draft", "to_review", "ToRewiew",
-                            "to_be_fixed", "ToBeFixed",
-                            "to_publish", "ToPublish", "published", "Published")
-            );
+        Map<String, String> statuses = new HashMap<>(
+            Map.of("draft", "Draft", "to_review", "ToRewiew",
+                    "to_be_fixed", "ToBeFixed",
+                    "to_publish", "ToPublish", "published", "Published")
+        );
 
         TaskStatusCreateDTO statusData = new TaskStatusCreateDTO();
         for (Map.Entry<String, String> status : statuses.entrySet()) {
