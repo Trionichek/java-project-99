@@ -8,7 +8,6 @@ import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.service.LabelService;
 import hexlet.code.service.TaskStatusService;
-import io.sentry.Sentry;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
