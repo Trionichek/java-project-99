@@ -8,6 +8,7 @@ import hexlet.code.service.LabelService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -27,8 +28,11 @@ public class LabelController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    public List<LabelDTO> index() {
-        return labelService.getAll();
+    public ResponseEntity<List<LabelDTO>> index() {
+        var labels = labelService.getAll();
+        return ResponseEntity.ok()
+                .header("X-Total-Count", String.valueOf(labels.size()))
+                .body(labels);
     }
 
     @PostMapping("")
