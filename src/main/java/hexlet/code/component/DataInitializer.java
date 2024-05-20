@@ -44,11 +44,11 @@ public class DataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        try {
+        /*try {
             throw new Exception("This is a test.");
         } catch (Exception e) {
             Sentry.captureException(e);
-        }
+        }*/
 
         if (userRepository.findByEmail("hexlet@example.com").isEmpty()) {
             User user = new User();
