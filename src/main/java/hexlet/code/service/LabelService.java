@@ -8,25 +8,25 @@ import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.LabelMapper;
 import hexlet.code.model.Label;
 import hexlet.code.repository.LabelRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
+@Transactional
 public class LabelService {
-    @Autowired
-    private LabelRepository labelRepository;
 
-    @Autowired
-    private LabelMapper labelMapper;
+    private final LabelRepository labelRepository;
+
+    private final LabelMapper labelMapper;
 
     public List<LabelDTO> getAll() {
         List<Label> labels = labelRepository.findAll();
         return labels.stream()
-                .map(t -> labelMapper.map(t))
+                .map(labelMapper::map)
                 .toList();
     }
 

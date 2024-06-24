@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.FetchType;
 import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -41,7 +42,7 @@ public class TaskStatus implements BaseEntity {
     @Size(min = 1)
     private String slug;
 
-    @OneToMany(mappedBy = "taskStatus")
+    @OneToMany(mappedBy = "taskStatus", fetch = FetchType.EAGER)
     private List<Task> tasks;
 
     @CreatedDate
