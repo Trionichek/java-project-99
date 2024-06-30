@@ -10,13 +10,11 @@ import hexlet.code.model.Label;
 import hexlet.code.repository.LabelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class LabelService {
 
     private final LabelRepository labelRepository;

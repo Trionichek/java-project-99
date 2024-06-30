@@ -35,10 +35,6 @@ public class Label {
     @Column(unique = true)
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Task> tasks;
-
-
     @CreatedDate
     private LocalDate createdAt;
 }

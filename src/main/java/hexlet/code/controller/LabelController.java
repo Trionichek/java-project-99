@@ -6,7 +6,7 @@ import hexlet.code.dto.LabelDTO;
 import hexlet.code.dto.LabelUpdateDTO;
 import hexlet.code.service.LabelService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/api/labels")
 public class LabelController {
 
@@ -30,7 +30,7 @@ public class LabelController {
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<LabelDTO>> index() {
-        var labels = labelService.getAll();
+        List<LabelDTO> labels = labelService.getAll();
         return ResponseEntity.ok()
                 .header("X-Total-Count", String.valueOf(labels.size()))
                 .body(labels);

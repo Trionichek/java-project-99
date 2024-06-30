@@ -26,20 +26,15 @@ public class DataInitializer implements ApplicationRunner {
 
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private LabelRepository labelRepository;
+    private final LabelRepository labelRepository;
 
-    @Autowired
-    private TaskStatusRepository statusRepository;
+    private final TaskStatusRepository statusRepository;
 
-    @Autowired
-    private TaskStatusService statusService;
+    private final TaskStatusService statusService;
 
-    @Autowired
-    private LabelService labelService;
+    private final LabelService labelService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -58,7 +53,7 @@ public class DataInitializer implements ApplicationRunner {
             userRepository.save(user);
         }
 
-        Map<String, String> statuses = new HashMap<>(
+       Map<String, String> statuses = new HashMap<>(
             Map.of("draft", "Draft", "to_review", "ToRewiew",
                     "to_be_fixed", "ToBeFixed",
                     "to_publish", "ToPublish", "published", "Published")
