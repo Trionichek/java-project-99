@@ -9,7 +9,6 @@ import hexlet.code.repository.UserRepository;
 import hexlet.code.service.LabelService;
 import hexlet.code.service.TaskStatusService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -53,7 +52,7 @@ public class DataInitializer implements ApplicationRunner {
             userRepository.save(user);
         }
 
-       Map<String, String> statuses = new HashMap<>(
+        Map<String, String> statuses = new HashMap<>(
             Map.of("draft", "Draft", "to_review", "ToRewiew",
                     "to_be_fixed", "ToBeFixed",
                     "to_publish", "ToPublish", "published", "Published")
