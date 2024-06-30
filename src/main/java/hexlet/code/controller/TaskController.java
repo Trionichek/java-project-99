@@ -6,7 +6,6 @@ import hexlet.code.dto.TaskCreateDTO;
 import hexlet.code.dto.TaskDTO;
 import hexlet.code.dto.TaskParamsDTO;
 import hexlet.code.dto.TaskUpdateDTO;
-import hexlet.code.dto.TaskDTOForShow;
 import hexlet.code.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -47,8 +46,8 @@ public class TaskController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TaskDTOForShow show(@PathVariable Long id) {
-        return taskService.getByIdForShow(id);
+    public TaskDTO show(@PathVariable Long id) {
+        return taskService.getById(id);
     }
 
     @PutMapping("/{id}")

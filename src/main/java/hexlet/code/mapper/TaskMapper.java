@@ -2,7 +2,6 @@ package hexlet.code.mapper;
 
 import hexlet.code.dto.TaskCreateDTO;
 import hexlet.code.dto.TaskDTO;
-import hexlet.code.dto.TaskDTOForShow;
 import hexlet.code.dto.TaskUpdateDTO;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.model.Label;
@@ -49,13 +48,6 @@ public abstract class TaskMapper {
     @Mapping(source = "assignee.id", target = "assigneeId")
     @Mapping(source = "labels", target = "taskLabelIds")
     public abstract TaskDTO map(Task task);
-
-    @Mapping(source = "name", target = "title")
-    @Mapping(source = "description", target = "content")
-    @Mapping(source = "taskStatus.slug", target = "status")
-    @Mapping(source = "assignee.id", target = "assigneeId")
-    @Mapping(source = "labels", target = "taskLabelIds")
-    public abstract TaskDTOForShow mapForShow(Task task);
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "content", target = "description")

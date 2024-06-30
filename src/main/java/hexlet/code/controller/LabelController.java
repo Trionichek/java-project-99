@@ -3,7 +3,6 @@ package hexlet.code.controller;
 
 import hexlet.code.dto.LabelCreateDTO;
 import hexlet.code.dto.LabelDTO;
-import hexlet.code.dto.LabelDTOForShow;
 import hexlet.code.dto.LabelUpdateDTO;
 import hexlet.code.service.LabelService;
 import jakarta.validation.Valid;
@@ -45,8 +44,8 @@ public class LabelController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public LabelDTOForShow show(@PathVariable Long id) {
-        return labelService.getByIdForShow(id);
+    public LabelDTO show(@PathVariable Long id) {
+        return labelService.getById(id);
     }
 
     @PutMapping("/{id}")

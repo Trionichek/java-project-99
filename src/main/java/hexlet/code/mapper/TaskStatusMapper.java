@@ -3,7 +3,6 @@ package hexlet.code.mapper;
 
 import hexlet.code.dto.TaskStatusCreateDTO;
 import hexlet.code.dto.TaskStatusDTO;
-import hexlet.code.dto.TaskStatusDTOForShow;
 import hexlet.code.dto.TaskStatusUpdateDTO;
 import hexlet.code.model.TaskStatus;
 import org.mapstruct.Mapper;
@@ -21,8 +20,6 @@ import org.mapstruct.MappingTarget;
 public abstract class TaskStatusMapper {
     public abstract TaskStatus map(TaskStatusCreateDTO taskStatusCreateDTO);
     public abstract TaskStatusDTO map(TaskStatus taskStatus);
-
-    public abstract TaskStatusDTOForShow mapForShow(TaskStatus taskStatus);
 
     public abstract void update(TaskStatusUpdateDTO taskStatusUpdateDTO, @MappingTarget TaskStatus taskStatus);
 }

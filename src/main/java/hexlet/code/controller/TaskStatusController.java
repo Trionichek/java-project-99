@@ -3,7 +3,6 @@ package hexlet.code.controller;
 
 import hexlet.code.dto.TaskStatusCreateDTO;
 import hexlet.code.dto.TaskStatusDTO;
-import hexlet.code.dto.TaskStatusDTOForShow;
 import hexlet.code.dto.TaskStatusUpdateDTO;
 import hexlet.code.service.TaskStatusService;
 import jakarta.validation.Valid;
@@ -46,8 +45,8 @@ public class TaskStatusController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TaskStatusDTOForShow show(@PathVariable Long id) {
-        return taskStatusService.getByIdForShow(id);
+    public TaskStatusDTO show(@PathVariable Long id) {
+        return taskStatusService.getById(id);
     }
 
     @PutMapping("/{id}")
