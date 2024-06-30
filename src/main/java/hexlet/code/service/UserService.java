@@ -1,6 +1,7 @@
 package hexlet.code.service;
 
 import hexlet.code.dto.UserCreateDto;
+import hexlet.code.dto.UserDTOForShow;
 import hexlet.code.dto.UserDto;
 import hexlet.code.dto.UserUpdateDto;
 import hexlet.code.exception.ResourceNotFoundException;
@@ -36,6 +37,12 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
         return userMapper.map(user);
+    }
+
+    public UserDTOForShow getByIdForShow(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
+        return userMapper.mapForShow(user);
     }
 
     public UserDto create(UserCreateDto data) {

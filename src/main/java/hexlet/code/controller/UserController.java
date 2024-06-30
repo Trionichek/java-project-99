@@ -1,6 +1,7 @@
 package hexlet.code.controller;
 
 import hexlet.code.dto.UserCreateDto;
+import hexlet.code.dto.UserDTOForShow;
 import hexlet.code.dto.UserDto;
 import hexlet.code.dto.UserUpdateDto;
 import hexlet.code.service.UserService;
@@ -44,8 +45,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto show(@PathVariable Long id) {
-        return userService.getById(id);
+    public UserDTOForShow show(@PathVariable Long id) {
+        return userService.getByIdForShow(id);
     }
 
     @PutMapping("/{id}")

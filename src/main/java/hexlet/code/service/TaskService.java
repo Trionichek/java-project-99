@@ -1,8 +1,10 @@
 package hexlet.code.service;
 
 
+
 import hexlet.code.dto.TaskCreateDTO;
 import hexlet.code.dto.TaskDTO;
+import hexlet.code.dto.TaskDTOForShow;
 import hexlet.code.dto.TaskParamsDTO;
 import hexlet.code.dto.TaskUpdateDTO;
 import hexlet.code.exception.ResourceNotFoundException;
@@ -40,6 +42,12 @@ public class TaskService {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + "not found"));
         return taskMapper.map(task);
+    }
+
+    public TaskDTOForShow getByIdForShow(Long id) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + "not found"));
+        return taskMapper.mapForShow(task);
     }
 
     public TaskDTO create(TaskCreateDTO data) {
