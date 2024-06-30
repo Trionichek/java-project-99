@@ -18,7 +18,7 @@ import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -46,5 +46,5 @@ public class TaskStatus implements BaseEntity {
     private List<Task> tasks;
 
     @CreatedDate
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 }

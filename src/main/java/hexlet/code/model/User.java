@@ -20,7 +20,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -55,10 +55,10 @@ public class User implements BaseEntity, UserDetails {
     private List<Task> tasks;
 
     @LastModifiedDate
-    private Instant updatedAt;
+    private LocalDateTime updatedAt;
 
     @CreatedDate
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
 
     @Override
