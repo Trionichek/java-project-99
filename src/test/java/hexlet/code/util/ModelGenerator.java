@@ -64,7 +64,6 @@ public class ModelGenerator {
 
         labelModel = Instancio.of(Label.class)
                 .ignore(Select.field("id"))
-                .ignore(Select.field("tasks"))
                 .supply(Select.field("name"), () -> faker.lorem().characters(3, 1000))
                 .toModel();
     }
